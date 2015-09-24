@@ -4,7 +4,7 @@
 | --- | --- |
 | Dmytro Soloviov | [dsoloviov@frov.jcu.cz](dsoloviov@frov.jcu.cz) |
 
-TTFT (Time tracker filling tool) is a tool for automated filling the time tracking sheets of ICS FFPW USB (Institute of Complex Systems, Faculty of Fisheries and Protection of Waters, University of South Bohemia). Tool is based on Selenium WebDriver and written in [Python](https://www.python.org/).
+TTFT (Time tracker filling tool) is a tool for automated filling the time tracking sheets of ICS FFPW USB (Institute of Complex Systems, Faculty of Fisheries and Protection of Waters, University of South Bohemia). Tool is based on [Selenium WebDriver](http://www.seleniumhq.org/) and written in [Python](https://www.python.org/).
 
 ### Project structure
 
@@ -24,11 +24,13 @@ __dochazka.py__ is entry point.
 
 ### Dependencies
 
-TTFT relies on [Selenium WebDriver](http://www.seleniumhq.org/). The easiest way to install it is running the PIP utility in root directory of the tool:
+TTFT relies on [Selenium WebDriver](http://www.seleniumhq.org/). The easiest way to install it is via the PIP utility :
 
 ```
-pip install -r requirements.txt
+pip install selenium
 ```
+
+Also [Firefox](https://www.mozilla.org/en-US/firefox/new/) browser should be installed.
 
 ### Configuration file
 

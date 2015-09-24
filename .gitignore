@@ -1,2 +1,9 @@
 *.pyc
-config.ini
+*.pyo
+*.ini
+.idea/
+input/
+src/*.pyc
+src/*.pyo
+Thumbs.db
+*~
