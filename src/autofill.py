@@ -2,9 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from selenium import webdriver
-from selenium import webdriver
-from selenium.webdriver.common.by import By
-from selenium.webdriver.common.keys import Keys
 from selenium.webdriver.support.ui import Select
 import time
 
@@ -36,8 +33,6 @@ class Dochazka(object):
         self.driver.find_element_by_id('Submit').click()
 
     def __del__(self):
-        # Logout from time tracking system
-        time.sleep(1)
+        """ Logout from time tracking system """
         self.driver.find_element_by_link_text('Odhlásit se').click()
-        time.sleep(1)
         self.driver.quit()

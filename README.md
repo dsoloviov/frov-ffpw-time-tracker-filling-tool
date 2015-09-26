@@ -12,7 +12,6 @@ TTFT (Time tracker filling tool) is a tool for automated filling the time tracki
 /src
    __init__.py
    autofill.py
-   main.py
    parser.py
 dochazka.py
 requirements.txt
