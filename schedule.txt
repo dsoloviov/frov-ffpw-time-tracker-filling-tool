@@ -1,1 +1,1 @@
-FILL work FROM 1 TO 1 (07:00-11:00) IN 10 MONTH
+FILL vacation FROM 15 TO 20 (07:00-15:30) IN October MONTH WITH 'vacation' COMMENT

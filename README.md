@@ -6,6 +6,22 @@
 
 TTFT (Time tracker filling tool) is a tool for automated filling the time tracking sheets of ICS FFPW USB (Institute of Complex Systems, Faculty of Fisheries and Protection of Waters, University of South Bohemia). Tool is based on [Selenium WebDriver](http://www.seleniumhq.org/) and written in [Python](https://www.python.org/).
 
+### Running
+
+Tool can be started without argument (if __schedule.txt__ is available in tool's root directory):
+
+```
+python dochazka.py
+```
+
+Also it is possible to provide custom schedule file:
+
+```
+python dochazka.py -f %absolute_path_to_file%
+```
+
+Please make sure that appropriate username and password are provided in __config.ini__.
+
 ### Project structure
 
 ```
@@ -14,12 +30,9 @@ TTFT (Time tracker filling tool) is a tool for automated filling the time tracki
    autofill.py
    parser.py
 dochazka.py
-requirements.txt
 schedule.txt
 config.ini
 ```
-
-__dochazka.py__ is entry point.
 
 ### Dependencies
 
@@ -46,23 +59,37 @@ Password = your_password
 TTFT processes special scenario TXT file (__schedule.txt__) and perform command(s) inside it. The command structure is:
 
 ```
-FILL activity_type FROM start_date TO end_date (start_time:end_time) IN month MONTH
+FILL activity_type FROM start_date TO end_date (start_time:end_time)
+IN month MONTH WITH 'comment_text' COMMENT
 ```
 
-Uppercase words are used parsing the command, do not change them. User have to specify activity type (work, vacation, sick leave, etc.), date range (e.g. from 1st to 15th), time on work, month.
+__All command from FILL to COMMENT is one line__. Uppercase words are used parsing the command, do not change them. User have to specify activity type (work, vacation, sick leave, etc.), date range (e.g. from 1st to 15th), time on work, month.
 
 Schedule can contain several lines of commands that will be executed one by one:
 
 - work from 1st to 10th
 - vacation from 11th to 20th
-- work again from 21th to end of the month.
+- sick leave from 21th to end of the month
+
+The following translates into schedule command as:
+
+```
+FILL work FROM first TO 10 (07:00-15:30) IN October MONTH WITH ' ' COMMENT
+FILL vacation FROM 11 TO 20 (07:00-15:30) IN October MONTH WITH 'vacation' COMMENT
+FILL sick FROM 21 TO last (07:00-15:30) IN October MONTH WITH 'sick leave' COMMENT
+```
 
 #### Activity types
 
-- 'work'
-- 'vacation'
-- 'trip' (for business trip)
-- 'sick' (for sick leave)
+- 'work': Práce
+- 'vacation': Dovolená
+- 'trip': Služebni cesta
+- 'sick': Nemoc
+- 'holiday': Jiné volno
+- 'dayoff': Nahradní volno
+- 'doctor': Celodenní lekař
+- 'family': Ošetřování člena rodiny
+- 'other': Indispoziční volno
 
 #### Start / end date:
 
@@ -81,40 +108,44 @@ The format of time is HH:MM-HH:MM. For example, (07:00-18:00) means working from
 
 Month can be specified as number (1 for January, 12 for December) or using the word: January, June, etc. Also user can use keyword 'current' to use current month.
 
+#### Comment:
+
+Comment is a text wrapped in ''.
+
 #### Schedule examples:
 
 Work from 7AM to 11AM each day from 1st to 10th of October:
 
 ```
-FILL work FROM 1 TO 10 (07:00-11:00) IN 10 MONTH
+FILL work FROM 1 TO 10 (07:00-15:30) IN 10 MONTH WITH ' ' COMMENT
 ```
 ```
-FILL work FROM 1 TO 10 (07:00-11:00) IN October MONTH
+FILL work FROM 1 TO 10 (07:00-15:30) IN October MONTH WITH ' ' COMMENT
 ```
 
 Vacation from 1st of September (provided it's current month) till today:
 
 ```
-FILL vacation FROM first TO today (07:00-11:00) IN current MONTH
+FILL vacation FROM first TO today (07:00-15:30) IN current MONTH WITH 'vacation' COMMENT
 ```
 ```
-FILL vacation FROM 1 TO today (07:00-11:00) IN September MONTH
+FILL vacation FROM 1 TO today (07:00-15:30) IN September MONTH WITH 'vacation' COMMENT
 ```
 ```
-FILL vacation FROM 1 TO today (07:00-11:00) IN 9 MONTH
+FILL vacation FROM 1 TO today (07:00-15:30) IN 9 MONTH WITH 'vacation' COMMENT
 ```
 
 __Please keep in mind__ that 'today' keyword means not today's exact date (let's say '3rd of November 2015') but today's day number (3rd day of the month). Therefore using 'today' for following months is legal:
 
 ```
-FILL work FROM 1 TO today (07:00-11:00) IN current MONTH
+FILL work FROM 1 TO today (07:00-15:30) IN current MONTH WITH ' ' COMMENT
 ```
 ```
-FILL work FROM 1 TO today (07:00-11:00) IN December MONTH
+FILL work FROM 1 TO today (07:00-15:30) IN December MONTH WITH ' ' COMMENT
 ```
 
 __Also__ be sure not to abuse 'first' and 'last' keywords. For example, the following example will cause crash:
 
 ```
-FILL work FROM last TO first (07:00-11:00) IN December MONTH
+FILL work FROM last TO first (07:00-15:30) IN December MONTH WITH ' ' COMMENT
 ```

@@ -20,7 +20,7 @@ class Dochazka(object):
         self.driver.find_element_by_id('password').send_keys(psw)
         self.driver.find_element_by_id('submit').click()
 
-    def fill_form(self, wtype, check, month, day, hour, minute):
+    def fill_form(self, wtype, check, month, day, hour, minute, comment):
         """
         Fill form. All arguments are strings
         """
@@ -30,6 +30,8 @@ class Dochazka(object):
         Select(self.driver.find_element_by_id('den')).select_by_visible_text(day)
         Select(self.driver.find_element_by_id('hodina')).select_by_visible_text(hour)
         Select(self.driver.find_element_by_id('minuta')).select_by_visible_text(minute)
+        self.driver.find_element_by_id("coment").clear()
+        self.driver.find_element_by_id("coment").send_keys(comment)
         self.driver.find_element_by_id('Submit').click()
 
     def __del__(self):

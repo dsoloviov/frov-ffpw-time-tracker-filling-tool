@@ -30,6 +30,7 @@ def main(_file):
         OUT = schedule['CHECK-OUT']
         START = schedule['START']
         END = schedule['END']
+        COMMENT = schedule['COMMENT']
 
         for DAY in range(START, END + 1):
             date = datetime.date(YEAR, MONTH, DAY)  # generate date for current day
@@ -37,8 +38,8 @@ def main(_file):
                 pass
             else:
                 # Fill form with provided values
-                d.fill_form(WORK_TYPE, u'příchod', fix_int(MONTH), fix_int(DAY), IN[0], IN[1])
-                d.fill_form(WORK_TYPE, u'odchod', fix_int(MONTH), fix_int(DAY), OUT[0], OUT[1])
+                d.fill_form(WORK_TYPE, u'příchod', fix_int(MONTH), fix_int(DAY), IN[0], IN[1], COMMENT)
+                d.fill_form(WORK_TYPE, u'odchod', fix_int(MONTH), fix_int(DAY), OUT[0], OUT[1], COMMENT)
 
 
 if __name__ == '__main__':

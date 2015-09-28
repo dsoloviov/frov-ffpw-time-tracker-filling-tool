@@ -60,6 +60,7 @@ def schedule_parser(command):
     data['START'] = search('FROM ', ' TO', command)  # extract start day
     data['END'] = search('TO ', ' \(', command)  # extract end day
     data['MONTH'] = search('IN ', ' MONTH', command)  # extract month
+    data['COMMENT'] = search('WITH \'', '\' COMMENT', command)  # extract comment
     time = search(' \(', '\) ', command)  # extract time
 
     #+----------------------+#
@@ -70,7 +71,12 @@ def schedule_parser(command):
     activity = {'work': u'Práce',
                 'vacation': u'Dovolená',
                 'trip': u'Služebni cesta',
-                'sick': u'Nemoc'}
+                'sick': u'Nemoc',
+                'family': u'Ošetřování člena rodiny',
+                'holiday': u'Jiné volno',
+                'dayoff': u'Nahradní volno',
+                'doctor': u'Celodenní lekař',
+                'other': u'Indispoziční volno'}
     data['TYPE'] = activity[data['TYPE']]
 
     # Parse today's date
