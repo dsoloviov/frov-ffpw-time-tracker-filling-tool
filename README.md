@@ -14,10 +14,12 @@ Tool can be started without argument (if __schedule.txt__ is available in tool's
 python dochazka.py
 ```
 
-Also it is possible to provide custom schedule file:
+Also it is possible to provide custom schedule file and/or custom config file:
 
 ```
-python dochazka.py -f %absolute_path_to_file%
+python dochazka.py -f %absolute_path_to_schedule_file%
+python dochazka.py -c %absolute_path_to_config_file%
+python dochazka.py -c %path_1% -f %path_2%
 ```
 
 Please make sure that appropriate username and password are provided in __config.ini__.

@@ -8,14 +8,14 @@ from src.parser import schedule_parser
 import datetime
 
 
-def main(_file):
+def main(_file, _config):
     def fix_int(value):
         """ Add leading zero to 1-9"""
         if len(str(value)) == 1:
             return '0%s' % value
         return str(value)
 
-    c = config_parser('config.ini')  # parse config file
+    c = config_parser(_config)  # parse config file
     lines = [line for line in open(_file, 'r')]
     commands = [x for x in lines if x.startswith('FILL')]
     d = Dochazka(c['usr'], c['psw'])  # log in to the system
@@ -43,7 +43,17 @@ def main(_file):
 
 
 if __name__ == '__main__':
-    if (len(sys.argv) == 3) and (sys.argv[1] == '-f'):
-        main(sys.argv[-1])
-    else:
-        main('schedule.txt')
+    schedule = 'schedule.txt'
+    config = 'config.ini'
+
+    # Check if schedule and/or config
+    # is passed as an argument
+    if '-f' in sys.argv:
+        i = sys.argv.index('-f')
+        schedule = sys.argv[i + 1]
+    if '-c' in sys.argv:
+        i = sys.argv.index('-c')
+        config = sys.argv[i + 1]
+
+    # Run tool
+    main(schedule, config)

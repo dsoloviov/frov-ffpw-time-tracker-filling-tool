@@ -1,2 +1,3 @@
 1. update documentation
 2. add unit testing
+3. add removing entries

@@ -1,1 +1,0 @@
-FILL vacation FROM 15 TO 20 (07:00-15:30) IN October MONTH WITH 'vacation' COMMENT

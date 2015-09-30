@@ -43,6 +43,7 @@ def schedule_parser(command):
     |END - end date                |
     |CHECK-IN - time of work start*|
     |CHECK-OUT - time of work end* |
+    |COMMENT - comment             |
     +------------------------------+
     *CHECK-IN and CHECK-OUT are lists:
         ['HH', 'MM']
