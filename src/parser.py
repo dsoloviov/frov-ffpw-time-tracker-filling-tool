@@ -135,4 +135,8 @@ def schedule_parser(command):
     data['CHECK-IN'] = time[0].split(':')
     data['CHECK-OUT'] = time[1].split(':')
 
+    # Check comment
+    if not data['COMMENT']:
+        data['COMMENT'] = ' '
+    
     return data
