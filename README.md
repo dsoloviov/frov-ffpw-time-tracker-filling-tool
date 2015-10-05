@@ -69,29 +69,21 @@ __All command from FILL to COMMENT is one line__. Uppercase words are used parsi
 
 Schedule can contain several lines of commands that will be executed one by one:
 
-- work from 1st to 10th
 - vacation from 11th to 20th
 - sick leave from 21th to end of the month
 
 The following translates into schedule command as:
 
 ```
-FILL work FROM first TO 10 (07:00-15:30) IN October MONTH WITH ' ' COMMENT
 FILL vacation FROM 11 TO 20 (07:00-15:30) IN October MONTH WITH 'vacation' COMMENT
 FILL sick FROM 21 TO last (07:00-15:30) IN October MONTH WITH 'sick leave' COMMENT
 ```
 
 #### Activity types
 
-- 'work': Práce
 - 'vacation': Dovolená
 - 'trip': Služebni cesta
 - 'sick': Nemoc
-- 'holiday': Jiné volno
-- 'dayoff': Nahradní volno
-- 'doctor': Celodenní lekař
-- 'family': Ošetřování člena rodiny
-- 'other': Indispoziční volno
 
 #### Start / end date:
 
@@ -116,15 +108,6 @@ Comment is a text wrapped in ''.
 
 #### Schedule examples:
 
-Work from 7AM to 11AM each day from 1st to 10th of October:
-
-```
-FILL work FROM 1 TO 10 (07:00-15:30) IN 10 MONTH WITH ' ' COMMENT
-```
-```
-FILL work FROM 1 TO 10 (07:00-15:30) IN October MONTH WITH ' ' COMMENT
-```
-
 Vacation from 1st of September (provided it's current month) till today:
 
 ```
@@ -140,14 +123,14 @@ FILL vacation FROM 1 TO today (07:00-15:30) IN 9 MONTH WITH 'vacation' COMMENT
 __Please keep in mind__ that 'today' keyword means not today's exact date (let's say '3rd of November 2015') but today's day number (3rd day of the month). Therefore using 'today' for following months is legal:
 
 ```
-FILL work FROM 1 TO today (07:00-15:30) IN current MONTH WITH ' ' COMMENT
+FILL vacation FROM 1 TO today (07:00-15:30) IN current MONTH WITH ' ' COMMENT
 ```
 ```
-FILL work FROM 1 TO today (07:00-15:30) IN December MONTH WITH ' ' COMMENT
+FILL vacation FROM 1 TO today (07:00-15:30) IN December MONTH WITH ' ' COMMENT
 ```
 
-__Also__ be sure not to abuse 'first' and 'last' keywords. For example, the following example will cause crash:
+__Also__ be sure not to abuse 'first' and 'last' keywords. For example, the following example will cause error:
 
 ```
-FILL work FROM last TO first (07:00-15:30) IN December MONTH WITH ' ' COMMENT
+FILL vacation FROM last TO first (07:00-15:30) IN December MONTH WITH ' ' COMMENT
 ```

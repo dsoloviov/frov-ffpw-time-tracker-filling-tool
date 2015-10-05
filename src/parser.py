@@ -69,15 +69,15 @@ def schedule_parser(command):
     #+----------------------+#
 
     # Check activity type
-    activity = {'work': u'Práce',
-                'vacation': u'Dovolená',
+    activity = {'vacation': u'Dovolená',
                 'trip': u'Služebni cesta',
-                'sick': u'Nemoc',
-                'family': u'Ošetřování člena rodiny',
-                'holiday': u'Jiné volno',
-                'dayoff': u'Nahradní volno',
-                'doctor': u'Celodenní lekař',
-                'other': u'Indispoziční volno'}
+                'sick': u'Nemoc'}
+                #'family': u'Ošetřování člena rodiny',
+                #'holiday': u'Jiné volno',
+                #'dayoff': u'Nahradní volno',
+                #'doctor': u'Celodenní lekař',
+                #'other': u'Indispoziční volno',
+                #'work': u'Práce',}
     data['TYPE'] = activity[data['TYPE']]
 
     # Parse today's date
