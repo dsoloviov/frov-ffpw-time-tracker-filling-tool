@@ -84,6 +84,12 @@ FILL sick FROM 21 TO last (07:00-15:30) IN October MONTH WITH 'sick leave' COMME
 - 'vacation': Dovolená
 - 'trip': Služebni cesta
 - 'sick': Nemoc
+- 'work': Práce
+- 'family': Ošetřování člena rodiny
+- 'holiday': Jiné volno
+- 'dayoff': Nahradní volno
+- 'doctor': Celodenní lekař
+- 'other': Indispoziční volno
 
 #### Start / end date:
 
