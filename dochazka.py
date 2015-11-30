@@ -1,6 +1,10 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
 
+__author__ = 'Dmytro Soloviov'
+__email__ = 'dsoloviov@frov.jcu.cz'
+__version__ = '1.0'
+
 import sys
 from src.autofill import Dochazka
 from src.parser import config_parser
@@ -42,10 +46,26 @@ def main(_file, _config):
                 d.fill_form(WORK_TYPE, u'odchod', fix_int(MONTH), fix_int(DAY), OUT[0], OUT[1], COMMENT)
 
 
+def _help():
+    """
+    Print the help message
+    """
+    print('Time tracker filling tool')
+    print('Version: %s\nAuthor: %s\nEmail: %s\n' % (__version__, __author__, __email__))
+    print('usage: dochazka.py [--version] [--help] \n\t\t   [-f <path>] [-c <path>]\n')
+
+
 if __name__ == '__main__':
     schedule = 'schedule.txt'
     config = 'config.ini'
 
+    # Check for --help or --version
+    if '--version' in sys.argv:
+        print(__version__)
+        sys.exit()
+    if '--help' in sys.argv:
+        _help()
+        sys.exit()
     # Check if schedule and/or config
     # is passed as an argument
     if '-f' in sys.argv:
@@ -56,4 +76,10 @@ if __name__ == '__main__':
         config = sys.argv[i + 1]
 
     # Run tool
-    main(schedule, config)
+    try:
+        main(schedule, config)
+    except IOError:
+        print('\nERROR! Please make sure that both config.ini'
+              ' and schedule.txt are present at tool\'s location or specified'
+              ' as an argument\n')
+        _help()

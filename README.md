@@ -22,7 +22,7 @@ python dochazka.py -c %absolute_path_to_config_file%
 python dochazka.py -c %path_1% -f %path_2%
 ```
 
-Please make sure that appropriate username and password are provided in __config.ini__.
+Please make sure to provide the appropriate username and password in __config.ini__.
 
 ### Project structure
 
@@ -38,17 +38,17 @@ config.ini
 
 ### Dependencies
 
-TTFT relies on [Selenium WebDriver](http://www.seleniumhq.org/). The easiest way to install it is via the PIP utility :
+TTFT relies on [Selenium WebDriver](http://www.seleniumhq.org/):
 
 ```
-pip install selenium
+sudo pip install selenium
 ```
 
 Also [Firefox](https://www.mozilla.org/en-US/firefox/new/) browser should be installed.
 
 ### Configuration file
 
-Configuration file (__config.ini__) contains username and password needed to loging to the tracking system. The valid file structure is following:
+Configuration file (__config.ini__) contains username and password needed to log in to the tracking system. The valid file structure is following:
 
 ```
 [Credentials]
@@ -58,21 +58,21 @@ Password = your_password
 
 ### Creating schedules
 
-TTFT processes special scenario TXT file (__schedule.txt__) and perform command(s) inside it. The command structure is:
+TTFT processes scenario from the TXT file (__schedule.txt__) and performes command(s) inside it. The command structure is:
 
 ```
 FILL activity_type FROM start_date TO end_date (start_time:end_time)
 IN month MONTH WITH 'comment_text' COMMENT
 ```
 
-__All command from FILL to COMMENT is one line__. Uppercase words are used parsing the command, do not change them. User have to specify activity type (work, vacation, sick leave, etc.), date range (e.g. from 1st to 15th), time on work, month.
+__All command from FILL to COMMENT is one line__. Uppercase words are used parsing the command, do not change them. User have to specify activity type (work, vacation, sick leave, etc.), date range (e.g. from 1st to 15th), time to submit and month. Comments are optional (hovewer, single quotes are required).
 
-Schedule can contain several lines of commands that will be executed one by one:
+Schedule can contain several lines of commands that will be executed one by one, for example:
 
 - vacation from 11th to 20th
 - sick leave from 21th to end of the month
 
-The following translates into schedule command as:
+These translates into schedule commands as:
 
 ```
 FILL vacation FROM 11 TO 20 (07:00-15:30) IN October MONTH WITH 'vacation' COMMENT
@@ -81,13 +81,13 @@ FILL sick FROM 21 TO last (07:00-15:30) IN October MONTH WITH 'sick leave' COMME
 
 #### Activity types
 
-- 'vacation': Dovolená
-- 'trip': Služebni cesta
-- 'sick': Nemoc
-- 'work': Práce
+- 'vacation': Dovolená (vacation)
+- 'trip': Služebni cesta (busibess trip)
+- 'sick': Nemoc (sick leave)
+- 'work': Práce (regular work)
 - 'family': Ošetřování člena rodiny
 - 'holiday': Jiné volno
-- 'dayoff': Nahradní volno
+- 'dayoff': Nahradní volno (day off)
 - 'doctor': Celodenní lekař
 - 'other': Indispoziční volno
 
@@ -106,7 +106,7 @@ The format of time is HH:MM-HH:MM. For example, (07:00-18:00) means working from
 
 #### Month:
 
-Month can be specified as number (1 for January, 12 for December) or using the word: January, June, etc. Also user can use keyword 'current' to use current month.
+Month can be specified as number (1 for January, 12 for December) or using the word: January, June, etc. Also user can use the keyword 'current' to use current month.
 
 #### Comment:
 
@@ -126,7 +126,7 @@ FILL vacation FROM 1 TO today (07:00-15:30) IN September MONTH WITH 'vacation' C
 FILL vacation FROM 1 TO today (07:00-15:30) IN 9 MONTH WITH 'vacation' COMMENT
 ```
 
-__Please keep in mind__ that 'today' keyword means not today's exact date (let's say '3rd of November 2015') but today's day number (3rd day of the month). Therefore using 'today' for following months is legal:
+__Please keep in mind__ that 'today' keyword doesn't mean today's exact date (let's say '3rd of November 2015') but rather today's day number (3rd day of the month). Therefore using 'today' for upcoming months is legal:
 
 ```
 FILL vacation FROM 1 TO today (07:00-15:30) IN current MONTH WITH ' ' COMMENT
