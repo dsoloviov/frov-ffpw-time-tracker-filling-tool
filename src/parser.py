@@ -18,14 +18,16 @@ def config_parser(_file):
     |--------------|
     |usr - username|
     |psw - password|
+    |url - URL     |
     +--------------|
     """
     c = ConfigParser()
     c.readfp(open(_file))
     usr = c.get('Credentials', 'Username')
     psw = c.get('Credentials', 'Password')
+    url = c.get('Credentials', 'URL')
 
-    return {'usr': usr, 'psw': psw}
+    return {'usr': usr, 'psw': psw, 'url': url}
 
 
 def schedule_parser(command):
@@ -69,15 +71,15 @@ def schedule_parser(command):
     #+----------------------+#
 
     # Check activity type
-    activity = {'vacation': u'Dovolená',
-                'trip': u'Služebni cesta',
-                'sick': u'Nemoc',
-                'family': u'Ošetřování člena rodiny',
-                'holiday': u'Jiné volno',
-                'dayoff': u'Nahradní volno',
-                'doctor': u'Celodenní lekař',
-                'other': u'Indispoziční volno',
-                'work': u'Práce'}
+    activity = {'vacation': 'dovol',
+                'trip': 'slces',
+                'sick': 'nemoc',
+                'family': 'osetr',
+                'holiday': 'jinev',
+                'dayoff': 'nahra',
+                'doctor': 'celod',
+                'other': 'indis',
+                'work': 'prace'}
     data['TYPE'] = activity[data['TYPE']]
 
     # Parse today's date
@@ -98,6 +100,8 @@ def schedule_parser(command):
     if data['MONTH'] in months.keys():
         data['MONTH'] = months[data['MONTH']]
     elif data['MONTH'] == 'current':
+        data['MONTH'] = month
+    elif data['MONTH'] == 'Current':
         data['MONTH'] = month
     else:
         data['MONTH'] = int(data['MONTH'])
@@ -138,5 +142,5 @@ def schedule_parser(command):
     # Check comment
     if not data['COMMENT']:
         data['COMMENT'] = ' '
-    
+
     return data

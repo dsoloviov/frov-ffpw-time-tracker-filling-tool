@@ -2,8 +2,8 @@
 # -*- coding: utf-8 -*-
 
 __author__ = 'Dmytro Soloviov'
-__email__ = 'dsoloviov@frov.jcu.cz'
-__version__ = '1.0'
+__email__ = 'dmytro.soloviov@gmail.com'
+__version__ = '2.0'
 
 import sys
 from src.autofill import Dochazka
@@ -22,7 +22,7 @@ def main(_file, _config):
     c = config_parser(_config)  # parse config file
     lines = [line for line in open(_file, 'r')]
     commands = [x for x in lines if x.startswith('FILL')]
-    d = Dochazka(c['usr'], c['psw'])  # log in to the system
+    d = Dochazka(c['url'], c['usr'], c['psw'])  # log in to the system
     for command in commands:
         schedule = schedule_parser(command)  # parse schedule file
 
@@ -42,8 +42,13 @@ def main(_file, _config):
                 pass
             else:
                 # Fill form with provided values
-                d.fill_form(WORK_TYPE, u'příchod', fix_int(MONTH), fix_int(DAY), IN[0], IN[1], COMMENT)
-                d.fill_form(WORK_TYPE, u'odchod', fix_int(MONTH), fix_int(DAY), OUT[0], OUT[1], COMMENT)
+                d.fill_form('Odeslat', 'in', WORK_TYPE, COMMENT, fix_int(DAY), IN[0], fix_int(MONTH), IN[1])
+                d.fill_form('Odeslat', 'out', WORK_TYPE, COMMENT, fix_int(DAY), OUT[0], fix_int(MONTH), OUT[1])
+                print('Filling in: %s.%s.%s, %s:%s - %s:%s (%s)' % (DAY, MONTH, YEAR,
+                                                               IN[0], IN[1],
+                                                               OUT[0], OUT[1],
+                                                               WORK_TYPE))
+
 
 
 def _help():
