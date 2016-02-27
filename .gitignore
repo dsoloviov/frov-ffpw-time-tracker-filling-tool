@@ -1,5 +1,3 @@
-config.ini
-schedule.txt
 *.pyc
 *.pyo
 *.ini
