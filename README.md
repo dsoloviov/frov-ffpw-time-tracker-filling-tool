@@ -60,8 +60,7 @@ Password = your_password
 TTFT processes scenario from the TXT file (__schedule.txt__) and performs command(s) inside it. The command structure is:
 
 ```
-FILL activity_type FROM start_date TO end_date (HH:MM-HH:MM)
-IN month MONTH WITH 'comment_text' COMMENT
+FILL activity_type FROM start_date TO end_date (HH:MM-HH:MM) IN month MONTH WITH 'comment_text' COMMENT
 ```
 
 __All command from FILL to COMMENT is one line__. Uppercase words are used for parsing the command, do not change them. User have to specify activity type (work, vacation, sick leave, etc.), date range (e.g. from 1st to 15th), time to submit and month. Comments are optional (however, single quotes are required).
