@@ -60,7 +60,7 @@ Password = your_password
 TTFT processes scenario from the TXT file (__schedule.txt__) and performs command(s) inside it. The command structure is:
 
 ```
-FILL activity_type FROM start_date TO end_date (start_time:end_time)
+FILL activity_type FROM start_date TO end_date (HH:MM-HH:MM)
 IN month MONTH WITH 'comment_text' COMMENT
 ```
 
