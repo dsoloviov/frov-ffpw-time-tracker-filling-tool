@@ -79,6 +79,8 @@ FILL vacation FROM 11 TO 20 (07:00-15:30) IN October MONTH WITH 'vacation' COMME
 FILL sick FROM 21 TO last (07:00-15:30) IN October MONTH WITH 'sick leave' COMMENT
 ```
 
+__Please be advised__ that this tool automatically omits weekends (Saturday and Sunday).
+
 #### Activity types
 
 - 'vacation': Dovolená (vacation)
